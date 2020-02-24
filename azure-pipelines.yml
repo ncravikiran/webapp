@@ -20,6 +20,5 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-steps:
 - publish: $(System.DefaultWorkingDirectory)/target
   artifact: WebApp.war
