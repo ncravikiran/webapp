@@ -1,0 +1,10 @@
+.git\
+.settings\
+.sonar\
+Robots_Dev\
+jenkins.properties
+Jenkinsfile
+package.json
+sonar-project.properties
+README.md
+azure-pipelines.yml
