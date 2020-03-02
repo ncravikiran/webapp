@@ -22,23 +22,24 @@ steps:
        Write-Host "i am not in master branch!!"
     }
   displayName: 'PowerShell Script'
-  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+
 - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
   displayName: 'Prepare analysis on SonarQube'
   inputs:
     SonarQube: newagent
     scannerMode: CLI
-#condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
 
 - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
-#condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
+condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
 
 - task: OneLuckiDev.json2variable.vsts-json-to-variable.oneLuckiDevJson2Variable@1
   displayName: 'JSON to Variable'
   inputs:
     jsonFile: version.json
-    #condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/$(Build.Repository.Name)'
@@ -52,7 +53,7 @@ steps:
      !README.md
     TargetFolder: '$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name)'
     CleanTargetFolder: true
-    #condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
 
 - task: ArchiveFiles@2
   displayName: '$(Build.Repository.LocalPath)'
@@ -61,7 +62,7 @@ steps:
     includeRootFolder: false
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.Repository.Name).zip'
     verbose: true
-    #condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
 
 - powershell: |
    $vartosplit = "$(Build.Repository.Name)"
@@ -77,7 +78,7 @@ steps:
    
    Invoke-WebRequest -Uri $URI -InFile $SOURCE -Method Put -Credential $CREDS
   displayName: 'PowerShell Script'
-#condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
 
 
 #trigger:
