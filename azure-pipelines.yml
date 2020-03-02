@@ -73,8 +73,8 @@ steps:
    
   displayName: 'PowerShell Script'
 
-trigger:
-- dev
+#trigger:
+#- dev
 
 - script: |
    echo "hello this is form a dev branch and contains tasks for dev branch- first task"
