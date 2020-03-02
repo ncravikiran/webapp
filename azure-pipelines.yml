@@ -23,7 +23,6 @@ steps:
     }
     displayName: 'PowerShell Script'
   #condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
-
 - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
   displayName: 'Prepare analysis on SonarQube'
   inputs:
