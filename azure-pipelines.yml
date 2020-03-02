@@ -33,7 +33,7 @@ steps:
 
 - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
-condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
 
 - task: OneLuckiDev.json2variable.vsts-json-to-variable.oneLuckiDevJson2Variable@1
   displayName: 'JSON to Variable'
