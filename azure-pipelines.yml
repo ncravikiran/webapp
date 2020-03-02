@@ -4,11 +4,31 @@ trigger:
 pool:
   name: Azure Pipelines
   demands: java
+  vmImage: windows-2019
 
 #Your build pipeline references an undefined variable named ‘json.versionnumber’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 #Your build pipeline references an undefined variable named ‘json.versionnumber’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+
+
+
 
 steps:
+
+- powershell: |
+   if ("$(Build.SourceBranchName)" -eq "master")
+   {
+      Write-Host 'branch is - "$(Build.SourceBranchName)"'
+   "##vso[task.setvariable variable=apiendpoint;]http://mydomainis.com/v1/api/reset_test"
+   }
+   else
+   {
+       Write-Host "i am not in master branch!!"
+   }
+   
+   
+  displayName: 'PowerShell Script'
+
 - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
   displayName: 'Prepare analysis on SonarQube'
   inputs:
@@ -59,19 +79,7 @@ steps:
    Invoke-WebRequest -Uri $URI -InFile $SOURCE -Method Put -Credential $CREDS
   displayName: 'PowerShell Script'
 
-- powershell: |
-   if ("$(Build.SourceBranchName)" -eq "master")
-   {
-      Write-Host 'branch is - "$(Build.SourceBranchName)"'
-   "##vso[task.setvariable variable=apiendpoint;]http://mydomainis.com/v1/api/reset_test"
-   }
-   else
-   {
-       Write-Host "i am not in master branch!!"
-   }
-   
-   
-  displayName: 'PowerShell Script'
+
 
 #trigger:
 #- dev
