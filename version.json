@@ -2,7 +2,7 @@
 	"versionnumber": "3.0.0.0",
 	"repository": "KPOW-releases",
 	"groupId": "com/name/kpow",
-	"artifactId": "robo_name"
-	"stapi": "http://thisisastendpoint.com"
+	"artifactId": "robo_name",
+	"stapi": "http://thisisastendpoint.com",
 	"etapi": "http://thisisaetendpoint.com"
 }
