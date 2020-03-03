@@ -78,16 +78,3 @@ steps:
       Invoke-WebRequest -Uri $URI -InFile $SOURCE -Method Put -Credential $CREDS
     displayName: "PowerShell Script"
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'dev'))
-
-  #trigger:
-  #- dev
-
-  - script: |
-      echo "hello this is form a dev branch and contains tasks for dev branch- first task"
-      echo $(apiendpoint)
-    displayName: "Command Line Script1"
-
-  - script: |
-      echo "hello this is form a dev branch and contains tasks for dev branch- second task"
-      echo $(apiendpoint)
-    displayName: "Command Line Script2"
