@@ -3,4 +3,6 @@
 	"repository": "KPOW-releases",
 	"groupId": "com/name/kpow",
 	"artifactId": "robo_name"
+	"stapi": "http://thisisastendpoint.com"
+	"etapi": "http://thisisaetendpoint.com"
 }
